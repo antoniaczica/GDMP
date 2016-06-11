@@ -4,12 +4,19 @@ using System.Collections;
 public class AssassinHide : MonoBehaviour {
 
 	Vector3 lightSize;
+    GameScore gameScore;
+    public int playerNum;
+
 	void Start () {
+        gameScore = GameObject.FindGameObjectWithTag("Environment").GetComponent<GameScore>();
+        playerNum = gameScore.getPlayerNum(this.name);
 		lightSize = GameObject.Find ("Cube").transform.localScale;
+
 	}
 
 	void Update () {
-		if (Input.GetKey ("space")) {
+		if (Input.GetButton("XButton" + playerNum)) {
+			print ("Hiding");
 			HideOrShow(new Vector3(0,0,0));
 		} else {
 			HideOrShow(lightSize);
