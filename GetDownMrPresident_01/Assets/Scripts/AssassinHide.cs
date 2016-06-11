@@ -6,17 +6,19 @@ public class AssassinHide : MonoBehaviour {
 	Vector3 lightSize;
     GameScore gameScore;
     public int playerNum;
+    Rigidbody rb;
 
 	void Start () {
         gameScore = GameObject.FindGameObjectWithTag("Environment").GetComponent<GameScore>();
         playerNum = gameScore.getPlayerNum(this.name);
 		lightSize = GameObject.Find ("Cube").transform.localScale;
+		rb = this.GetComponent<Rigidbody>();
 
 	}
 
 	void Update () {
-		if (Input.GetButton("XButton" + playerNum)) {
-			print ("Hiding");
+		float rbVel = rb.velocity.magnitude;
+		if (Input.GetButton("XButton" + playerNum) && rbVel <0.5) {
 			HideOrShow(new Vector3(0,0,0));
 		} else {
 			HideOrShow(lightSize);
