@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\AnimateMaterialOfffset.cs" />
+     <Compile Include="Assets\Scripts\AssassinHide.cs" />
      <Compile Include="Assets\Scripts\CanvasManager.cs" />
      <Compile Include="Assets\Scripts\CrowdSpawner.cs" />
      <Compile Include="Assets\Scripts\GameScore.cs" />
