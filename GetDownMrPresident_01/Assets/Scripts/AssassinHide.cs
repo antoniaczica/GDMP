@@ -19,7 +19,7 @@ public class AssassinHide : MonoBehaviour {
 
 	void Update () {
 		float rbVel = rb.velocity.magnitude;
-		if (Input.GetButton("XButton" + playerNum) && rbVel <0.5) {
+		if (Input.GetAxis("LeftTrigger" + playerNum) == 1 && rbVel <0.5) {
 			HideOrShow(new Vector3(0,0,0));
 		} else {
 			HideOrShow(lightSize);
