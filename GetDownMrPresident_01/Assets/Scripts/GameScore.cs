@@ -20,10 +20,10 @@ public class GameScore : MonoBehaviour
 
     RoundManager roundManager;
 
-	public Image blueAssassin;
-	public Image blueSecurity;
-	public Image redAssassin;
-	public Image redSecurity;
+    public Image blueAssassin;
+    public Image blueSecurity;
+    public Image redAssassin;
+    public Image redSecurity;
 
 
     void Awake()
@@ -36,8 +36,11 @@ public class GameScore : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //redSecurity.enabled = false;
+        //blueSecurity.enabled = true;
+        //redAssassin.enabled = true;
+        //blueAssassin.enabled = false;
         roundManager = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<RoundManager>();
-
         scoreOne.text = firstPlayerScore.ToString();
         scoreTwo.text = secondPlayerScore.ToString();
         newRoundStarted();
@@ -72,11 +75,13 @@ public class GameScore : MonoBehaviour
 
     public void bodyguardWins()
     {
-        if (firstPlayerIsAssassin){
+        if (firstPlayerIsAssassin)
+        {
             secondPlayerScore++;
             scoreTwo.text = secondPlayerScore.ToString();
         }
-        else{
+        else
+        {
             firstPlayerScore++;
             scoreOne.text = firstPlayerScore.ToString();
         }
@@ -98,7 +103,7 @@ public class GameScore : MonoBehaviour
         {
             secondPlayerScore++;
             scoreTwo.text = secondPlayerScore.ToString();
-        }        
+        }
 
         if (firstPlayerScore > 5 || secondPlayerScore > 5)
         {
@@ -130,11 +135,14 @@ public class GameScore : MonoBehaviour
         {
             return firstPlayerIsAssassin ? 1 : 2;
         }
-        else if (objName == "Dev_Player_01 (Bodyguard)")
+        else if (objName == "Dev_Player_01 (Bodyguard)" || objName == "InspectionCam (2)")
         {
             return firstPlayerIsAssassin ? 2 : 1;
         }
-        else return -1;
+        else
+        {
+            return -1;
+        }
     }
 
     public int getAssassinPlayerNum()
@@ -146,23 +154,24 @@ public class GameScore : MonoBehaviour
     public void newRoundStart()
     {
         firstPlayerIsAssassin = !firstPlayerIsAssassin;
-		flipPlayerImages ();
+        flipPlayerImages();
     }
 
     public void flipPlayerImages()
     {
         if (firstPlayerIsAssassin)
         {
-            redSecurity.enabled = false;
-            blueSecurity.enabled = true;
-            redAssassin.enabled = true;
-            blueAssassin.enabled = false;
+            //redSecurity.enabled = false;
+            //blueSecurity.enabled = true;
+            //redAssassin.enabled = true;
+            //blueAssassin.enabled = false;
         }
-        else {
-            redSecurity.enabled = true;
-            blueSecurity.enabled = false;
-            redAssassin.enabled = false;
-            blueAssassin.enabled = true;
+        else
+        {
+            //redSecurity.enabled = true;
+            //blueSecurity.enabled = false;
+            //redAssassin.enabled = false;
+            //blueAssassin.enabled = true;
         }
     }
 }

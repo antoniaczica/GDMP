@@ -58,10 +58,10 @@ public class RoundManager : MonoBehaviour
     {
         if (state == RoundState.SpawnSelect)
         {
-            if (Input.GetAxis("RightStickX1") == 1) { SelectSpawnDirection("right"); }
-            else if (Input.GetAxis("RightStickX1") == -1) { SelectSpawnDirection("left"); }
-            else if (Input.GetAxis("RightStickY1") == 1) { SelectSpawnDirection("up"); }
-            else if (Input.GetAxis("RightStickY1") == -1) { SelectSpawnDirection("down"); }
+            if (Input.GetAxis("RightStickX" + assassinPlayerNum) == 1) { SelectSpawnDirection("right"); }
+            else if (Input.GetAxis("RightStickX" + assassinPlayerNum) == -1) { SelectSpawnDirection("left"); }
+            else if (Input.GetAxis("RightStickY" + assassinPlayerNum) == 1) { SelectSpawnDirection("up"); }
+            else if (Input.GetAxis("RightStickY" + assassinPlayerNum) == -1) { SelectSpawnDirection("down"); }
         }
     }
 
@@ -79,12 +79,12 @@ public class RoundManager : MonoBehaviour
         }
 
         mainTitle.gameObject.SetActive(false);
-        blur.enabled = false;
         disableAssassin.enabled = true;
         disableAssassinTakedown.enabled = true;
         disableBodyguard.enabled = true;
         musicSource.Play();
-        state = RoundState.Playing;
+
+        // UI asking assassin to select spawn point should show at this point
 
         state = RoundState.SpawnSelect;
     }
@@ -93,22 +93,33 @@ public class RoundManager : MonoBehaviour
     {
         if (direction == "up")
         {
-            Instantiate(player, new Vector3(-13, 0, 13), Quaternion.identity);
+            player.transform.position = new Vector3(-8, 0, 8);
         }
         else if (direction == "down")
         {
-            Instantiate(player, new Vector3(13, 0, -13), Quaternion.identity);
+            player.transform.position = new Vector3(8, 0, -8);
         }
         else if (direction == "left")
         {
-            Instantiate(player, new Vector3(-13, 0, -13), Quaternion.identity);
+            player.transform.position = new Vector3(-8, 0, -8);
         }
         else if (direction == "right")
         {
-            Instantiate(player, new Vector3(13, 0, 13), Quaternion.identity);
+            player.transform.position = new Vector3(8, 0, 8);
         }
+
+        Object[] spawners = Object.FindObjectsOfType<CrowdSpawner>();
+        for (int i = 0; i < spawners.Length; i++)
+        {
+            CrowdSpawner spawner = (CrowdSpawner)spawners[i];
+            spawner.SpawnCrowd();
+        }
+        print(spawners[0]);
+
         state = RoundState.Playing;
         gameScore.newRoundStarted();
+        blur.enabled = false;
+        // UI asking assassin to select spawn point should be hidden at this point
     }
 
     public void AssassinRevealed()

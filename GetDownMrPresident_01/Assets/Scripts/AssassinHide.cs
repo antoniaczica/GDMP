@@ -11,7 +11,8 @@ public class AssassinHide : MonoBehaviour {
 	void Start () {
         gameScore = GameObject.FindGameObjectWithTag("Environment").GetComponent<GameScore>();
         playerNum = gameScore.getPlayerNum(this.name);
-		lightSize = GameObject.Find ("Cube").transform.localScale;
+
+        lightSize = GameObject.Find ("Cube").transform.localScale;
 		rb = this.GetComponent<Rigidbody>();
 
 	}
