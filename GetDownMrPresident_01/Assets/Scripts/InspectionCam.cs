@@ -7,9 +7,12 @@ public class InspectionCam : MonoBehaviour {
 
 	public int playerNum = 1;
 	public float sensitivity = 0.4f;
+
+	GameScore gameScore;
 	
 	void Start() {
-		
+		gameScore = GameObject.FindGameObjectWithTag("Environment").GetComponent<GameScore>();
+		playerNum = gameScore.getPlayerNum("Dev_Player_01 (Bodyguard)");
 	}
 	
 	void Update() {
