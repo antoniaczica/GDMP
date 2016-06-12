@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour {
 
 	public bool locked = true;
 
+	public bool spawning = false; 
+
 	void Start() {
 		rigid = GetComponent<Rigidbody>();
 		animator = GetComponentInChildren<Animator>();
@@ -47,6 +49,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
+		if(!spawning){
         Vector3 v = new Vector3(Input.GetAxis("LeftStickX" + playerNum) * actSpeed, 0, Input.GetAxis("LeftStickY" + playerNum) * actSpeed);
         
         v = Camera.main.transform.TransformDirection(v);
@@ -66,5 +69,9 @@ public class PlayerMovement : MonoBehaviour {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rigid.velocity), 0.1f);
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
     }
+	}
 
+	public void setSpawning(bool boolean){
+		spawning = boolean;
+	}
 }

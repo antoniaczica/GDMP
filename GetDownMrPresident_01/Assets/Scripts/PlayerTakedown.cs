@@ -14,13 +14,17 @@ public class PlayerTakedown : MonoBehaviour {
     {
         gameScore = GameObject.FindGameObjectWithTag("Environment").GetComponent<GameScore>();
         playerNum = gameScore.getPlayerNum(this.name);
+		//print ("getPLayer name: " + this.name);
     }
     
 	void Update() {
 		// Assuming that player 1 is assassin, will need to be changed when player switching is implemented
-		if (playerNum > -1 && Input.GetButtonDown("AButton" + playerNum)) {
-			print("button!!!!");
-			Takedown();
+		//print("trynna udate : "+playerNum);
+		if (playerNum != -1) {
+			if (Input.GetAxis ("RightTrigger" + playerNum) == 1) {
+			
+				Takedown ();
+			}
 		}
 	}
 	public void Takedown() {
@@ -32,13 +36,13 @@ public class PlayerTakedown : MonoBehaviour {
 				print("takedonw!!!! " + target.playerNum + "---" + this.playerNum);
 				print(Vector3.Distance(target.transform.position, transform.position));
 
-				if (playerNum == 1) {
+				if (this.name.Equals("Dev_Player_01 (Assassin)")) {
 					if (target.gameObject.CompareTag("President")) {
 						RoundManager.main.PresidentDown();
 					} else {
 						break;
 					}
-				} else if (playerNum == 2) {
+				} else if (this.name.Equals("Dev_Player_01 (Bodyguard)")) {
 					if (target.gameObject.CompareTag("President")) {
 						continue;
 					} else {

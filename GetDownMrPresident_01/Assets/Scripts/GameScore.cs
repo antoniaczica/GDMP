@@ -141,7 +141,7 @@ public class GameScore : MonoBehaviour
         }
         else
         {
-            return -1;
+            return -1; //pres
         }
     }
 

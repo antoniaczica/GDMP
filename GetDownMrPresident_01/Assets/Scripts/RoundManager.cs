@@ -44,9 +44,9 @@ public class RoundManager : MonoBehaviour
 
     void Start()
     {
-        disableAssassin.enabled = false;
-        disableAssassinTakedown.enabled = false;
-        disableBodyguard.enabled = false;
+//        disableAssassin.enabled = false;
+//        disableAssassinTakedown.enabled = false;
+//        disableBodyguard.enabled = false;
         StartCoroutine(StartHideMainTitle());
 
         gameScore = GameObject.FindGameObjectWithTag("Environment").GetComponent<GameScore>();
@@ -58,9 +58,10 @@ public class RoundManager : MonoBehaviour
     {
         if (state == RoundState.SpawnSelect)
         {
+			disableAssassin.setSpawning (true);
+			disableBodyguard.setSpawning (true);
             if (Input.GetAxis("RightStickX" + assassinPlayerNum) == 1) { SelectSpawnDirection("right"); }
             else if (Input.GetAxis("RightStickX" + assassinPlayerNum) == -1) { SelectSpawnDirection("left"); }
-            else if (Input.GetAxis("RightStickY" + assassinPlayerNum) == 1) { SelectSpawnDirection("up"); }
             else if (Input.GetAxis("RightStickY" + assassinPlayerNum) == -1) { SelectSpawnDirection("down"); }
         }
     }
@@ -79,9 +80,9 @@ public class RoundManager : MonoBehaviour
         }
 
         mainTitle.gameObject.SetActive(false);
-        disableAssassin.enabled = true;
-        disableAssassinTakedown.enabled = true;
-        disableBodyguard.enabled = true;
+//        disableAssassin.enabled = true;
+//        disableAssassinTakedown.enabled = true;
+//        disableBodyguard.enabled = true;
         musicSource.Play();
 
         // UI asking assassin to select spawn point should show at this point
@@ -91,11 +92,9 @@ public class RoundManager : MonoBehaviour
 
     public void SelectSpawnDirection(string direction)
     {
-        if (direction == "up")
-        {
-            player.transform.position = new Vector3(-8, 0, 8);
-        }
-        else if (direction == "down")
+		disableAssassin.setSpawning (false);
+		disableBodyguard.setSpawning (false);
+        if (direction == "down")
         {
             player.transform.position = new Vector3(8, 0, -8);
         }
