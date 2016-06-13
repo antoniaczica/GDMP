@@ -60,9 +60,9 @@ public class RoundManager : MonoBehaviour
         {
 			disableAssassin.setSpawning (true);
 			disableBodyguard.setSpawning (true);
-            if (Input.GetAxis("RightStickX" + assassinPlayerNum) == 1) { SelectSpawnDirection("right"); }
-            else if (Input.GetAxis("RightStickX" + assassinPlayerNum) == -1) { SelectSpawnDirection("left"); }
-            else if (Input.GetAxis("RightStickY" + assassinPlayerNum) == -1) { SelectSpawnDirection("down"); }
+			if (Input.GetAxis("RightStickX" + assassinPlayerNum) == 1 || Input.GetKeyDown("right")) { SelectSpawnDirection("right"); }
+			else if (Input.GetAxis("RightStickX" + assassinPlayerNum) == -1 || Input.GetKeyDown("left")) { SelectSpawnDirection("left"); }
+			else if (Input.GetAxis("RightStickY" + assassinPlayerNum) == -1 || Input.GetKeyDown("down")) { SelectSpawnDirection("down"); }
         }
     }
 
